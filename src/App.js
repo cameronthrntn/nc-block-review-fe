@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './styles/App.css';
 import Login from './components/Login';
 import ArticleList from './components/Article-List';
+import { Router, Link } from '@reach/router';
+import Header from './components/Header';
 
 export default class App extends Component {
   state = {
@@ -14,9 +15,11 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">Login</header>
-        <Login setToken={this.setToken} />
-        <ArticleList token={this.state.token} />
+        <Header />
+        <Router>
+          <Login path="/login" setToken={this.setToken} />
+          <ArticleList path="/" token={this.state.token} />
+        </Router>
       </div>
     );
   }

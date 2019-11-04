@@ -11,8 +11,7 @@ export default class Login extends Component {
   };
   formSubmit = e => {
     e.preventDefault();
-    login(this.state).then(token => 
-      this.props.setToken(token))
+    login(this.state).then(token => this.props.setToken(token));
   };
   render() {
     return (
