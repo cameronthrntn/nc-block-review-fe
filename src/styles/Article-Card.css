@@ -1,6 +1,6 @@
 .articleCard {
   width: 90%;
-  height: 180px;
+  /* height: 180px; */
   border-radius: 5px;
   box-shadow: 2px 2px 5px #181b20;
   display: flex;
@@ -10,30 +10,33 @@
   margin-bottom: 20px;
   overflow: hidden;
 }
+a {
+  text-decoration: none;
+  color: white;
+}
 
-.articleHeader {
+.articleBound {
   background: white;
   color: black;
   width: 100%;
 }
 
-/* .articleHeader h3 {
-  margin-top: 5px;
-  margin-bottom: 5px;
-} */
-
-.articleFooter {
-  background: white;
-  color: black;
-  width: 100%;
-}
-
-.footerContents {
+.boundContents {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 0 10px;
 }
 
 .votes p {
   float: left;
+}
+
+.subHeading {
+  font-size: 10px;
+  color: gray;
+}
+
+.articleTitle {
+  width: 100%;
 }

@@ -1,0 +1,23 @@
+.topBar {
+  background: rgb(190, 30, 30);
+  height: 5vh;
+  width: 100vw;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: bold;
+}
+
+.articleFullContents {
+  padding: 20px;
+}
+
+.articlebodyText {
+  text-align: justify;
+}
+
+.articleMetaInfo {
+  font-size: 10px;
+}

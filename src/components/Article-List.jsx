@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/Article-List.css';
 import * as api from '../utils/articles';
+import { Link } from '@reach/router';
 import ArticleCard from './Article-Card';
 
 export default class ArticleList extends Component {
@@ -9,14 +10,14 @@ export default class ArticleList extends Component {
     isLoading: true
     // isLoggedIn: false
   };
-  getArticles = () => {
+  getArticles = topic => {
     // console.log(this.props.token, '<- token');
-    api.getArtciles(this.props.token).then(({ articles }) => {
+    api.getArtciles(topic, this.props.token).then(({ articles }) => {
       this.setState({ articles, isLoading: false });
     });
   };
   componentDidMount() {
-    this.getArticles();
+    this.getArticles(this.props.topic);
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.token !== this.props.token) {
@@ -35,26 +36,34 @@ export default class ArticleList extends Component {
         ) : (
           <ul className="article-list">
             {this.state.articles.map(article => {
+              const date = new Date(article.created_at);
+              const displayDate = date.toDateString();
               return (
-                <ArticleCard>
-                  <li key={article.id} className="articleCard">
-                    <header className="articleHeader">
-                      <h3>{article.title}</h3>
-                    </header>
-                    <div className="articleContents">
-                      <p>{article.body.substring(0, 100).concat('...')}</p>
-                    </div>
-                    <footer className="articleFooter">
-                      <div className="footerContents">
-                        <p>{article.author}</p>
-                        <p>{article.comment_count} comments</p>
-                        <div className="votes">
-                          <p>{'<'}</p>
-                          <p>{article.votes}</p>
-                          <p>></p>
+                <ArticleCard key={article.article_id}>
+                  <li className="articleCard">
+                    <Link to={`/article/${article.article_id}`}>
+                      <header className="articleBound">
+                        <div className="boundContents">
+                          <p className="articleTitle">{article.title}</p>
+                          <p className="subHeading">-{article.topic}-</p>
+                          <p className="subHeading">{displayDate}</p>
                         </div>
+                      </header>
+                      <div className="articleContents">
+                        <p>{article.body.substring(0, 100).concat('...')}</p>
                       </div>
-                    </footer>
+                      <footer className="articleBound">
+                        <div className="boundContents">
+                          <p>{article.author}</p>
+                          <p>{article.comment_count} comments</p>
+                          <div className="votes">
+                            <p>{'<'}</p>
+                            <p>{article.votes}</p>
+                            <p>></p>
+                          </div>
+                        </div>
+                      </footer>
+                    </Link>
                   </li>
                 </ArticleCard>
               );
