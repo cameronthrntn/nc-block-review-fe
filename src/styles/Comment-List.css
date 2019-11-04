@@ -1,0 +1,5 @@
+.commentList {
+  list-style: none;
+  padding: 0;
+  background: var(--lighter-shade);
+}

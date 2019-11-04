@@ -1,5 +1,5 @@
-.topBar {
-  background: rgb(190, 30, 30);
+.bar {
+  background: var(--lighter-shade);
   height: 5vh;
   width: 100vw;
   color: white;
@@ -8,6 +8,27 @@
   align-items: center;
   justify-content: flex-start;
   font-weight: bold;
+  padding: 0 10px;
+}
+
+.bar p  {
+  float: left;
+}
+
+.barTitle {
+  margin: 0;
+  width: 100%;
+  border-bottom: 1px solid white;
+  font-weight: lighter;
+}
+
+.bottomBar {
+  text-align: left;
+  height: auto;
+}
+
+.contentContainer {
+  padding: 0 10px;
 }
 
 .articleFullContents {

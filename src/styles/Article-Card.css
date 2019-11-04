@@ -2,13 +2,19 @@
   width: 90%;
   /* height: 180px; */
   border-radius: 5px;
-  box-shadow: 2px 2px 5px #181b20;
+  box-shadow: 2px 2px 5px var(--darker-shade);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   overflow: hidden;
+  transition: .3s;
+}
+
+.articleCard:hover {
+  transform: scale(1.05);
+  transition: .3s;
 }
 a {
   text-decoration: none;
@@ -17,7 +23,7 @@ a {
 
 .articleBound {
   background: white;
-  color: black;
+  color: var(--darker-shade);
   width: 100%;
 }
 
