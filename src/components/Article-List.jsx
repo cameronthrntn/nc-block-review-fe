@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import '../styles/Article-List.css';
 import * as api from '../utils/articles';
+import ArticleCard from './Article-Card';
 
 export default class ArticleList extends Component {
   state = {
     articles: [],
-    isLoading: true,
+    isLoading: true
     // isLoggedIn: false
   };
   getArticles = () => {
@@ -34,7 +35,29 @@ export default class ArticleList extends Component {
         ) : (
           <ul className="article-list">
             {this.state.articles.map(article => {
-              return <li key={article.id}>{article.title}</li>;
+              return (
+                <ArticleCard>
+                  <li key={article.id} className="articleCard">
+                    <header className="articleHeader">
+                      <h3>{article.title}</h3>
+                    </header>
+                    <div className="articleContents">
+                      <p>{article.body.substring(0, 100).concat('...')}</p>
+                    </div>
+                    <footer className="articleFooter">
+                      <div className="footerContents">
+                        <p>{article.author}</p>
+                        <p>{article.comment_count} comments</p>
+                        <div className="votes">
+                          <p>{'<'}</p>
+                          <p>{article.votes}</p>
+                          <p>></p>
+                        </div>
+                      </div>
+                    </footer>
+                  </li>
+                </ArticleCard>
+              );
             })}
           </ul>
         )}

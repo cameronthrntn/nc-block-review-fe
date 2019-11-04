@@ -1,0 +1,20 @@
+.header {
+  background: rgb(255, 255, 255);
+  height: 10vh;
+  width: 100%;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.header p {
+  font-size: calc(10px + 2vmin);
+  float: left;
+  font-weight: bolder;
+}
+
+.Np {
+  color: red
+}

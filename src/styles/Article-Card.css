@@ -1,0 +1,39 @@
+.articleCard {
+  width: 90%;
+  height: 180px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #181b20;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.articleHeader {
+  background: white;
+  color: black;
+  width: 100%;
+}
+
+/* .articleHeader h3 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+} */
+
+.articleFooter {
+  background: white;
+  color: black;
+  width: 100%;
+}
+
+.footerContents {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.votes p {
+  float: left;
+}
