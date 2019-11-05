@@ -1,8 +1,1 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250.44 218">
-  <defs>
-    <style>.cls-1{fill:#fff;stroke:#000;}.cls-1,.cls-2{stroke-miterlimit:10;}.cls-2{fill:none;stroke:#4d4d4d;}</style>
-  </defs>
-  <title>upChevron</title>
-  <path class="cls-1" d="M124.5,27.5" transform="translate(0.88 -10.5)"/>
-  <path class="cls-2" d="M137,11,248.75,228H216.48L124.81,45.14h-.93L32.21,228H-.06L111.72,11Z" transform="translate(0.88 -10.5)"/>
-</svg>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248.8 217"><defs><style>.cls-1{fill:#fff;stroke:#000;stroke-miterlimit:10;}.cls-2{fill:#4d4d4d;}</style></defs><title>upChevron</title><path class="cls-1" d="M124.5,27.5" transform="translate(-0.94 -11)"/><path class="cls-2" d="M134.92,16,241.55,223h-21L130.28,42.9a5,5,0,0,0-4.47-2.76h-.93a5,5,0,0,0-4.47,2.76L30.13,223h-21L115.77,16h19.15M138,11H112.72L.94,228H33.21L124.88,45.14h.93L217.48,228h32.27L138,11Z" transform="translate(-0.94 -11)"/></svg>
