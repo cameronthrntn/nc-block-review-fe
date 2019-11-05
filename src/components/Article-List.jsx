@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../styles/Article-List.css';
 import { getArticles, sortArticlesQuery, formatDates } from '../utils/articles';
 import { getTopics } from '../utils/topics';
-import { Link } from '@reach/router';
+// import { Link } from '@reach/router';
 import ArticleCard from './Article-Card';
 
 export default class ArticleList extends Component {
