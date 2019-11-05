@@ -38,6 +38,21 @@ a {
   float: left;
 }
 
+.voteButton {
+  height: 50px;
+  width: 50px;
+  background: none;
+  border: none;
+}
+
+.downvote {
+  transform: rotate(180deg);
+}
+
+img {
+  width: 100%;
+}
+
 .subHeading {
   font-size: 10px;
   color: gray;

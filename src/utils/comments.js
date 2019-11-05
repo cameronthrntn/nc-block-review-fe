@@ -20,3 +20,11 @@ exports.removeComment = async id => {
     `https://shubwub-nc-news.herokuapp.com/api/comments/${id}`
   );
 };
+
+exports.commentVote = async (val, id) => {
+  const { data } = await axios.patch(
+    `https://shubwub-nc-news.herokuapp.com/api/comments/${id}`,
+    { inc_votes: val }
+  );
+  return data.comment;
+};

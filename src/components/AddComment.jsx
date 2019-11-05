@@ -39,6 +39,7 @@ export default class AddComment extends Component {
                 placeholder="comment..."
                 value={this.state.comment}
                 onChange={this.formChange}
+                required
               ></input>
             </label>
             <button>post</button>

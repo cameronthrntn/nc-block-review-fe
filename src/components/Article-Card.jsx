@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/Article-Card.css';
 import { Link } from '@reach/router';
 import { articleVote } from '../utils/articles';
+import upChevron from '../images/upChevron.svg';
 
 export default class ArticleCard extends Component {
   state = {
@@ -12,15 +13,17 @@ export default class ArticleCard extends Component {
     this.setState({ article: this.props.article, isLoading: false });
   }
   vote = val => {
-    articleVote(val, this.state.article.article_id).then(article =>
-      this.setState(curr => {
-        return {
-          article: { ...article, comment_count: curr.article.comment_count }
-        };
-      })
-    ).then(() => {
-      this.props.updateArticleVotes(this.state.article)
-    })
+    articleVote(val, this.state.article.article_id)
+      .then(article =>
+        this.setState(curr => {
+          return {
+            article: { ...article, comment_count: curr.article.comment_count }
+          };
+        })
+      )
+      .then(() => {
+        this.props.updateArticleVotes(this.state.article);
+      });
   };
   render() {
     const {
@@ -54,9 +57,21 @@ export default class ArticleCard extends Component {
                 <p>{author}</p>
                 <p>{comment_count} comments</p>
                 <div className="votes">
-                  <button onClick={() => this.vote(-1)}>{'<'}</button>
+                  <button className="voteButton" onClick={() => this.vote(-1)}>
+                    <img
+                      className="upvote"
+                      src={upChevron}
+                      alt="Upvote arrow"
+                    />
+                  </button>
                   <p>{votes}</p>
-                  <button onClick={() => this.vote(1)}>></button>
+                  <button className="voteButton" onClick={() => this.vote(1)}>
+                    <img
+                      className="downvote"
+                      src={upChevron}
+                      alt="Upvote arrow"
+                    />
+                  </button>
                 </div>
               </div>
             </footer>
