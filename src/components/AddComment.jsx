@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/AddComment.css'
 import { postComment } from '../utils/comments';
 
 export default class AddComment extends Component {
@@ -29,7 +30,7 @@ export default class AddComment extends Component {
     return (
       <>
         {!this.state.showingForm ? (
-          <button onClick={this.toggleForm}>+</button>
+          <button className="showForm" onClick={this.toggleForm}>+</button>
         ) : (
           <form onSubmit={this.formSubmit}>
             <label htmlFor="commentInput">

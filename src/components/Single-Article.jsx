@@ -15,12 +15,12 @@ export default class SingleArticle extends Component {
 		const { title, author, body, article_id } = this.state.article;
 		return (
 			<article>
-				<header className="bar">
+				{/* <header className="bar">
 					<div className="contentContainer">
 						<p>{'<'}</p>
 						<p>Articles</p>
 					</div>
-				</header>
+				</header> */}
 				<article className="articleFullContents">
 					<p className="articlebodyText">{body}</p>
 				</article>

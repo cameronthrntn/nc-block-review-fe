@@ -1,0 +1,13 @@
+.showForm {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  background: var(--red);
+  border: none;
+  border-radius: 100%;
+  color: white;
+  font-weight: bolder;
+  font-size: 15vw;
+  padding: 0 15px;
+  box-shadow: 1px 5px 5px var(--darker-shade)
+}

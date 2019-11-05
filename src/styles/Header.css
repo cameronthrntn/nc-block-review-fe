@@ -15,6 +15,10 @@
   font-weight: bolder;
 }
 
+.header a {
+  color: black
+}
+
 .Np {
-  color: rgb(190, 30, 30)
+  color: var(--red)
 }
