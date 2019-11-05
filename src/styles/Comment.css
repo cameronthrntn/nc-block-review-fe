@@ -1,0 +1,13 @@
+.commentCard {
+  padding: 3px 20px;
+}
+
+.commentMeta {
+  text-align: left;
+}
+
+.commentBody {
+  text-align: justify;
+  padding-bottom: 5px;
+  border-bottom: 1px solid white;
+}

@@ -6,3 +6,15 @@
   justify-content: center;
   align-items: center;
 }
+
+.articleSorting {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerButton {
+  padding: 5px;
+  background: var(--lighter-shade);
+  color: white;
+  border: none;
+}
