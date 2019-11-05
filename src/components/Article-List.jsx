@@ -32,32 +32,15 @@ export default class ArticleList extends Component {
   sortArticles = e => {
     this.setState({ sort: e.target.value });
   };
-  commitSortArticles = (sort, topic) => {
-    sortArticlesQuery(sort, topic).then(articles =>
+  orderArticles = e => {
+    this.setState({ order: e.target.value });
+  };
+  sortAndOrderArticles = (sort, order, topic) => {
+    sortArticlesQuery(sort, order, topic).then(articles =>
       this.setState({ articles: formatDates(articles) })
     );
   };
-  orderArticles = e => {
-    const order = e.target.value;
-    this.setState(curr => {
-      const { sort } = this.state;
-      return order === 'asc'
-        ? {
-            articles: curr.articles.sort((a, b) => {
-              return sort !== 'created_at'
-                ? a[sort] - b[sort]
-                : new Date(a[sort]) - new Date(b[sort]);
-            })
-          }
-        : {
-            articles: curr.articles.sort((a, b) => {
-              return sort !== 'created_at'
-                ? b[sort] - a[sort]
-                : new Date(b[sort]) - new Date(a[sort]);
-            })
-          };
-    });
-  };
+
   updateArticleVotes = article => {
     this.setState(curr => {
       return {
@@ -91,8 +74,15 @@ export default class ArticleList extends Component {
     if (prevState.topic !== this.state.topic) {
       this.getArticles(this.state.topic);
     }
-    if (prevState.sort !== this.state.sort) {
-      this.commitSortArticles(this.state.sort, this.state.topic);
+    if (
+      prevState.sort !== this.state.sort ||
+      prevState.order !== this.state.order
+    ) {
+      this.sortAndOrderArticles(
+        this.state.sort,
+        this.state.order,
+        this.state.topic
+      );
     }
   }
   render() {
@@ -132,7 +122,11 @@ export default class ArticleList extends Component {
             <ul className="article-list">
               {this.state.articles.map(article => {
                 return (
-                  <ArticleCard key={article.article_id} article={article} updateArticleVotes={this.updateArticleVotes}/>
+                  <ArticleCard
+                    key={article.article_id}
+                    article={article}
+                    updateArticleVotes={this.updateArticleVotes}
+                  />
                 );
               })}
             </ul>

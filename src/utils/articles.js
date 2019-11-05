@@ -20,10 +20,10 @@ exports.getArticleById = async id => {
   return data.article;
 };
 
-exports.sortArticlesQuery = async (sort_by, topic) => {
+exports.sortArticlesQuery = async (sort_by, order, topic) => {
   const { data } = await axios.get(
     `https://shubwub-nc-news.herokuapp.com/api/articles`,
-    { params: { topic, sort_by } }
+    { params: { topic, sort_by, order } }
   );
   return data.articles;
 };
