@@ -17,7 +17,10 @@ export default class ArticleList extends Component {
   getArticles = topic => {
     // console.log(this.props.token, '<- token');
     getArticles(topic, this.props.token).then(({ articles }) => {
-      return this.setState({ articles: formatDates(articles), isLoading: false });
+      return this.setState({
+        articles: formatDates(articles),
+        isLoading: false
+      });
     });
   };
   getTopics = () => {
@@ -30,7 +33,9 @@ export default class ArticleList extends Component {
     this.setState({ sort: e.target.value });
   };
   commitSortArticles = (sort, topic) => {
-    sortArticlesQuery(sort, topic).then(articles => this.setState({ articles: formatDates(articles) }));
+    sortArticlesQuery(sort, topic).then(articles =>
+      this.setState({ articles: formatDates(articles) })
+    );
   };
   orderArticles = e => {
     const order = e.target.value;
@@ -53,6 +58,19 @@ export default class ArticleList extends Component {
           };
     });
   };
+  updateArticleVotes = article => {
+    this.setState(curr => {
+      return {
+        articles: curr.articles.map(item => {
+          if (item.article_id === article.article_id) {
+            item = article;
+          }
+          return item;
+        })
+      };
+    });
+  };
+
   componentDidMount() {
     const promises = [getArticles(this.props.topic), getTopics()];
     Promise.all(promises).then(data =>
@@ -114,7 +132,7 @@ export default class ArticleList extends Component {
             <ul className="article-list">
               {this.state.articles.map(article => {
                 return (
-                  <ArticleCard key={article.article_id} article={article} />
+                  <ArticleCard key={article.article_id} article={article} updateArticleVotes={this.updateArticleVotes}/>
                 );
               })}
             </ul>

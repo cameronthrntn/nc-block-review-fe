@@ -28,6 +28,14 @@ exports.sortArticlesQuery = async (sort_by, topic) => {
   return data.articles;
 };
 
+exports.articleVote = async (val, id) => {
+  const { data } = await axios.patch(
+    `https://shubwub-nc-news.herokuapp.com/api/articles/${id}`,
+    { inc_votes: val }
+  );
+  return exports.formatDates([data.article])[0];
+};
+
 exports.formatDates = articles => {
   return articles.map(article => {
     const date = new Date(article.created_at);
