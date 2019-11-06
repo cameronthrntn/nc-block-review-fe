@@ -33,7 +33,7 @@ export default class CommentList extends Component {
         <AddComment
           updateComments={this.updateComments}
           article={this.props.id}
-          token='token'
+          token={this.props.token}
         />
         <ul className="commentList">
           {comments.map(comment => {

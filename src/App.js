@@ -21,11 +21,11 @@ export default class App extends Component {
         <Header />
         <Router>
           <Login path="/login" setToken={this.setToken} />
-          <ArticleList path="/" token={this.state.token} />
-          <ArticleList path="/articles" token={this.state.token} />
-          <ArticleList path="/topic" token={this.state.token} />
-          <ArticleList path="/topic/:topic" token={this.state.token} />
-          <SingleArticle path="/article/:id" />
+          <ArticleList path="/" />
+          <ArticleList path="/articles" />
+          <ArticleList path="/topic" />
+          <ArticleList path="/topic/:topic" />
+          <SingleArticle path="/article/:id" token={this.state.token} />
         </Router>
       </div>
     );
