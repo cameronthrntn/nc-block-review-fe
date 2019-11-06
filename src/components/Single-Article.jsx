@@ -11,16 +11,20 @@ export default class SingleArticle extends Component {
 		getArticleById(this.props.id).then(article => this.setState({ article }));
 	}
 	render() {
-		const { title, author, body, article_id } = this.state.article;
+		const { title, author, body, article_id, created_at } = this.state.article;
 		return (
 			<article className="singleArticlePage">
 				<article className="articleFullContents">
 					<p className="articlebodyText">{body}</p>
 				</article>
-				<footer className="bar bottomBar">
+				<footer className="bar">
 					<div className="contentContainer">
 						<h4 className="barTitle">{title}</h4>
-						<p className="articleMetaInfo">{author}</p>
+						<div className="articleMetaInfo">
+
+						<p className="">{author}</p>
+						<p className="">{created_at}</p>
+						</div>
 					</div>
 				</footer>
 				<section className="commentSection">

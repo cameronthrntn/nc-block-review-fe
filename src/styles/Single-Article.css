@@ -13,31 +13,30 @@
   justify-content: flex-start;
   font-weight: bold;
   padding: 0 10px;
+  text-align: left;
+  height: auto;
 }
 
-.bar p  {
+.bar p {
   float: left;
 }
 
 .barTitle {
   margin: 0;
   width: 100%;
-  border-bottom: 1px solid white;
+  font-size: 2em;
   font-weight: lighter;
 }
 
-.bottomBar {
-  text-align: left;
-  height: auto;
-}
-
 .contentContainer {
+  width: 100%;
   padding: 0 10px;
 }
 
 .articleFullContents {
   padding: 20px;
-  margin-top: 4vh
+  margin-top: 4vh;
+  font-size: 1.2em;
 }
 
 .articlebodyText {
@@ -45,5 +44,7 @@
 }
 
 .articleMetaInfo {
-  font-size: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

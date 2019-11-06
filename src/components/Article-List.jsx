@@ -5,6 +5,7 @@ import { getTopics } from '../utils/topics';
 // import { Link } from '@reach/router';
 import ArticleCard from './Article-Card';
 import ErrorHandling from './ErrorHandling';
+import Topics from './Topics';
 
 export default class ArticleList extends Component {
   state = {
@@ -17,22 +18,16 @@ export default class ArticleList extends Component {
     // isLoggedIn: false
   };
   getArticles = async topic => {
-    // console.log(this.props.token, '<- token');
     try {
       const { articles } = await getArticles(topic, this.props.token);
       this.setState({
         articles: formatDates(articles),
-        isLoading: false
+        isLoading: false,
+        err: null
       });
     } catch (err) {
       this.setState({ err });
     }
-  };
-  getTopics = () => {
-    getTopics().then(topics => this.setState({ topics }));
-  };
-  filterArticles = e => {
-    this.setState({ topic: e.target.value });
   };
   sortArticles = e => {
     this.setState({ sort: e.target.value });
@@ -42,10 +37,9 @@ export default class ArticleList extends Component {
   };
   sortAndOrderArticles = (sort, order, topic) => {
     sortArticlesQuery(sort, order, topic).then(articles =>
-      this.setState({ articles: formatDates(articles) })
+      this.setState({ articles: formatDates(articles), err: null })
     );
   };
-
   updateArticleVotes = article => {
     this.setState(curr => {
       return {
@@ -63,7 +57,6 @@ export default class ArticleList extends Component {
     const promises = [getArticles(this.props.topic), getTopics()];
     Promise.all(promises)
       .then(data => {
-        console.dir(data);
         return this.setState({
           articles: formatDates(data[0].articles),
           topics: data[1],
@@ -79,8 +72,8 @@ export default class ArticleList extends Component {
       // }
       // this.getArticles();
     }
-    if (prevState.topic !== this.state.topic) {
-      this.getArticles(this.state.topic);
+    if (prevProps.topic !== this.props.topic) {
+      this.getArticles(this.props.topic);
     }
     if (
       prevState.sort !== this.state.sort ||
@@ -104,19 +97,7 @@ export default class ArticleList extends Component {
         ) : (
           <>
             <nav className="articleSorting">
-              <select
-                className="filterBy headerButton"
-                onChange={this.filterArticles}
-              >
-                <option value="">All Topics</option>
-                {this.state.topics.map(topic => {
-                  return (
-                    <option key={topic.slug} value={topic.slug}>
-                      {topic.slug}
-                    </option>
-                  );
-                })}
-              </select>
+              <Topics />
               <div className="sortBy">
                 <select className="headerButton" onChange={this.sortArticles}>
                   <option value="created_at">Date Created</option>

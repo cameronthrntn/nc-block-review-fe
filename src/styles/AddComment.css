@@ -9,7 +9,15 @@
   font-weight: bolder;
   font-size: 3em;
   padding: 0 15px;
-  box-shadow: 1px 5px 5px var(--darker-shade)
+  box-shadow: 1px 5px 5px var(--darker-shade);
+  max-width: 800px;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.showForm:hover {
+  background: var(--darker-red);
+  transition: .3s;
 }
 
 .commentForm {
@@ -20,6 +28,8 @@
   flex-direction: column;
   align-items: center;
   box-shadow: 1px 5px 5px var(--darker-shade);
+  max-width: 800px;
+  z-index: 2;
 }
 
 .closeForm {
@@ -31,6 +41,13 @@
   font-weight: bolder;
   margin-bottom: 25px;
   margin-right: 25px ;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.closeForm:hover {
+  color: var(--red);
+  transition: .3s;
 }
 
 .formSubmit {
@@ -41,7 +58,18 @@
   margin-top: 10px;
   margin-bottom: 25px;
   padding: 10px 20px;
+  max-width: 800px;
+  transition: .3s;
+  cursor: pointer;
 }
+
+.formSubmit:hover {
+  color: var(--main-colour);
+  background: white;
+  transition: .3s;
+}
+
+
 .commentInput {
   color: white;
   background: var(--main-colour);

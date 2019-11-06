@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/AddComment.css';
 import { postComment } from '../utils/comments';
+import Login from './Login';
 
 export default class AddComment extends Component {
   state = {
@@ -33,27 +34,31 @@ export default class AddComment extends Component {
           <button className="showForm" onClick={this.toggleForm}>
             +
           </button>
+        ) : !this.props.token ? (
+          <Login />
         ) : (
-          <form className="commentForm" onSubmit={this.formSubmit}>
-            <button className="closeForm" onClick={this.toggleForm}>
-              x
-            </button>
-            <label htmlFor="commentInput">
-              <textarea
-                rows="4"
-                className="commentInput"
-                id="commentInput"
-                type="textarea"
-                placeholder="comment..."
-                value={this.state.comment}
-                onChange={this.formChange}
-                required
-              ></textarea>
-            </label>
-            <button className="formSubmit" type="submit">
-              post
-            </button>
-          </form>
+          <container className="formContainer">
+            <form className="commentForm" onSubmit={this.formSubmit}>
+              <button className="closeForm" onClick={this.toggleForm}>
+                x
+              </button>
+              <label htmlFor="commentInput">
+                <textarea
+                  rows="4"
+                  className="commentInput"
+                  id="commentInput"
+                  type="textarea"
+                  placeholder="comment..."
+                  value={this.state.comment}
+                  onChange={this.formChange}
+                  required
+                ></textarea>
+              </label>
+              <button className="formSubmit" type="submit">
+                post
+              </button>
+            </form>
+          </container>
         )}
       </>
     );
