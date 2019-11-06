@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/Comment.css';
 import { removeComment, commentVote } from '../utils/comments';
 import Vote from './Vote';
+import bin from '../images/bin.svg'
 
 export default class Comment extends Component {
   state = {
@@ -38,7 +39,13 @@ export default class Comment extends Component {
                 <Vote votes={votes} type="comment" itemID={comment_id} />
               </div>
               {author === this.props.currentUser && (
-                <button onClick={this.deleteComment}>X</button>
+                <button className="voteButton" id="bin" onClick={this.deleteComment}>
+                  <img
+                    className="bin"
+                    src={bin}
+                    alt="deletion icon"
+                  />
+              </button>
               )}
             </footer>
           </>

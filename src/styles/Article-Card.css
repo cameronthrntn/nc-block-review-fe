@@ -23,39 +23,22 @@
 
 .articleBound {
   background: white;
-  color: var(--darker-shade);
   width: 100%;
 }
 
 .boundContents {
+  color: gray;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 0 10px;
 }
 
-.votes {
+.lowerBound {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-}
-
-.votes p {
-  float: left;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-.voteButton {
-  height: 40px;
-  width: 40px;
-  background: none;
-  padding: 0;
-  border: none;
-}
-
-.downvote {
-  transform: rotate(180deg);
+  font-size: .8em;
 }
 
 img {
@@ -68,6 +51,8 @@ img {
 }
 
 .articleTitle {
+  color: black;
+  font-weight: lighter;
   width: 100%;
 }
 

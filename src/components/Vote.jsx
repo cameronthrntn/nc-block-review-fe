@@ -3,6 +3,7 @@ import { handleVote } from '../utils/articles';
 import upChevron from '../images/upChevron.svg';
 import downActive from '../images/downActive.svg';
 import upActive from '../images/upActive.svg';
+import '../styles/Vote.css'
 
 export default class Vote extends Component {
   state = {

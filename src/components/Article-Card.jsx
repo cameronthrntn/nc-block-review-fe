@@ -7,47 +7,11 @@ import Vote from './Vote';
 export default class ArticleCard extends Component {
   state = {
     article: {},
-    isLoading: true,
-    isDownvoted: false,
-    isUpvoted: false
+    isLoading: true
   };
   componentDidMount() {
     this.setState({ article: this.props.article, isLoading: false });
   }
-  upvote = () => {
-    let val = this.state.isDownvoted ? 2 : 1;
-    if (this.state.isUpvoted) val = -1;
-    articleVote(val, this.state.article.article_id)
-      .then(article =>
-        this.setState(curr => {
-          return {
-            article: { ...article, comment_count: curr.article.comment_count },
-            isDownvoted: false,
-            isUpvoted: !curr.isUpvoted
-          };
-        })
-      )
-      .then(() => {
-        this.props.updateArticleVotes(this.state.article);
-      });
-  };
-  downvote = () => {
-    let val = this.state.isUpvoted ? -2 : -1;
-    if (this.state.isDownvoted) val = 1;
-    articleVote(val, this.state.article.article_id)
-      .then(article =>
-        this.setState(curr => {
-          return {
-            article: { ...article, comment_count: curr.article.comment_count },
-            isDownvoted: !curr.isDownvoted,
-            isUpvoted: false
-          };
-        })
-      )
-      .then(() => {
-        this.props.updateArticleVotes(this.state.article);
-      });
-  };
   render() {
     const {
       created_at,
@@ -76,10 +40,10 @@ export default class ArticleCard extends Component {
               </div>
             </Link>
             <footer className="articleBound">
-              <div className="boundContents">
+              <div className="boundContents lowerBound">
                 <p>{author}</p>
                 <p>{comment_count} comments</p>
-                <Vote votes={this.state.article.votes} type='article' itemID={article_id} />
+                <Vote votes={votes} type="article" itemID={article_id} />
               </div>
             </footer>
           </>
