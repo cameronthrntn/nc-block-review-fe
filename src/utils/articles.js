@@ -28,12 +28,14 @@ exports.sortArticlesQuery = async (sort_by, order, topic) => {
   return data.articles;
 };
 
-exports.articleVote = async (val, id) => {
+exports.handleVote = async (val, id, type) => {
+  console.log(val, id, type);
+
   const { data } = await axios.patch(
-    `https://shubwub-nc-news.herokuapp.com/api/articles/${id}`,
+    `https://shubwub-nc-news.herokuapp.com/api/${type}s/${id}`,
     { inc_votes: val }
   );
-  return exports.formatDates([data.article])[0];
+  return data[type];
 };
 
 exports.formatDates = articles => {

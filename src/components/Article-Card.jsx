@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import '../styles/Article-Card.css';
 import { Link } from '@reach/router';
 import { articleVote } from '../utils/articles';
-import upChevron from '../images/upChevron.svg';
-import downActive from '../images/downActive.svg';
-import upActive from '../images/upActive.svg';
 import Vote from './Vote';
 
 export default class ArticleCard extends Component {
@@ -82,40 +79,7 @@ export default class ArticleCard extends Component {
               <div className="boundContents">
                 <p>{author}</p>
                 <p>{comment_count} comments</p>
-                <Vote item={this.state.article}/>
-                {/* <div className="votes">
-                  <button className="voteButton" onClick={this.downvote}>
-                    {this.state.isDownvoted ? (
-                      <img
-                        className="downvote"
-                        src={downActive}
-                        alt="Downvote arrow"
-                      />
-                    ) : (
-                      <img
-                        className="downvote"
-                        src={upChevron}
-                        alt="Downvote arrow"
-                      />
-                    )}
-                  </button>
-                  <p>{votes}</p>
-                  <button className="voteButton" onClick={this.upvote}>
-                    {this.state.isUpvoted ? (
-                      <img
-                        className="upvote"
-                        src={upActive}
-                        alt="upvote arrow"
-                      />
-                    ) : (
-                      <img
-                        className="upvote"
-                        src={upChevron}
-                        alt="upvote arrow"
-                      />
-                    )}
-                  </button>
-                </div> */}
+                <Vote votes={this.state.article.votes} type='article' itemID={article_id} />
               </div>
             </footer>
           </>

@@ -1,7 +1,6 @@
 .bar {
   background: var(--lighter-shade);
   height: 5vh;
-  width: 100vw;
   color: white;
   display: flex;
   flex-direction: row;
@@ -33,6 +32,7 @@
 
 .articleFullContents {
   padding: 20px;
+  margin-top: 4vh
 }
 
 .articlebodyText {
