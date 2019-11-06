@@ -4,6 +4,7 @@ import { getArticles, sortArticlesQuery, formatDates } from '../utils/articles';
 import { getTopics } from '../utils/topics';
 // import { Link } from '@reach/router';
 import ArticleCard from './Article-Card';
+import ErrorHandling from './ErrorHandling';
 
 export default class ArticleList extends Component {
   state = {
@@ -11,17 +12,21 @@ export default class ArticleList extends Component {
     topics: [],
     topic: '',
     sort: 'created_at',
-    isLoading: true
+    isLoading: true,
+    err: null
     // isLoggedIn: false
   };
-  getArticles = topic => {
+  getArticles = async topic => {
     // console.log(this.props.token, '<- token');
-    getArticles(topic, this.props.token).then(({ articles }) => {
-      return this.setState({
+    try {
+      const { articles } = await getArticles(topic, this.props.token);
+      this.setState({
         articles: formatDates(articles),
         isLoading: false
       });
-    });
+    } catch (err) {
+      this.setState({ err });
+    }
   };
   getTopics = () => {
     getTopics().then(topics => this.setState({ topics }));
@@ -56,13 +61,16 @@ export default class ArticleList extends Component {
 
   componentDidMount() {
     const promises = [getArticles(this.props.topic), getTopics()];
-    Promise.all(promises).then(data =>
-      this.setState({
-        articles: formatDates(data[0].articles),
-        topics: data[1],
-        isLoading: false
+    Promise.all(promises)
+      .then(data => {
+        console.dir(data);
+        return this.setState({
+          articles: formatDates(data[0].articles),
+          topics: data[1],
+          isLoading: false
+        });
       })
-    );
+      .catch(err => this.setState({ err }));
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.token !== this.props.token) {
@@ -89,7 +97,9 @@ export default class ArticleList extends Component {
     return (
       <main>
         {/* {!this.state.isLoggedIn ? <link } */}
-        {this.state.isLoading ? (
+        {this.state.err ? (
+          <ErrorHandling err={this.state.err} />
+        ) : this.state.isLoading ? (
           <h2>Loading</h2>
         ) : (
           <>

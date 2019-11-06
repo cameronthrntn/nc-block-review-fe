@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/AddComment.css'
+import '../styles/AddComment.css';
 import { postComment } from '../utils/comments';
 
 export default class AddComment extends Component {
@@ -23,27 +23,36 @@ export default class AddComment extends Component {
       this.props.article
     ).then(comment => {
       this.props.updateComments(comment);
-      this.setState({ commentInput: '' });
+      this.setState({ commentInput: '', showingForm: false });
     });
   };
   render() {
     return (
       <>
         {!this.state.showingForm ? (
-          <button className="showForm" onClick={this.toggleForm}>+</button>
+          <button className="showForm" onClick={this.toggleForm}>
+            +
+          </button>
         ) : (
-          <form onSubmit={this.formSubmit}>
+          <form className="commentForm" onSubmit={this.formSubmit}>
+            <button className="closeForm" onClick={this.toggleForm}>
+              x
+            </button>
             <label htmlFor="commentInput">
-              <input
+              <textarea
+                rows="4"
+                className="commentInput"
                 id="commentInput"
-                type="text"
+                type="textarea"
                 placeholder="comment..."
                 value={this.state.comment}
                 onChange={this.formChange}
                 required
-              ></input>
+              ></textarea>
             </label>
-            <button>post</button>
+            <button className="formSubmit" type="submit">
+              post
+            </button>
           </form>
         )}
       </>

@@ -1,6 +1,5 @@
 .articleCard {
   width: 90%;
-  /* height: 180px; */
   border-radius: 5px;
   box-shadow: 2px 2px 5px var(--darker-shade);
   display: flex;
@@ -32,22 +31,17 @@
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 0 10px;
+  font-size: .8em;
 }
 
 .lowerBound {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: .8em;
 }
 
 img {
   width: 50%;
-}
-
-.subHeading {
-  font-size: 10px;
-  color: gray;
 }
 
 .articleTitle {

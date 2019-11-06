@@ -6,11 +6,9 @@ exports.getArticles = (topic, token) => {
     // headers: { Authorization: `BEARER ${token}` },
     params: { topic },
     url: 'https://shubwub-nc-news.herokuapp.com/api/articles'
-  })
-    .then(({ data }) => {
-      return data;
-    })
-    .catch(console.log);
+  }).then(({ data }) => {
+    return data;
+  });
 };
 
 exports.getArticleById = async id => {

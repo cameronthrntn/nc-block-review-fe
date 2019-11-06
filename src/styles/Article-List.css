@@ -5,18 +5,30 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 5vh;
 }
 
 .articleSorting {
+  margin-top: 5vh;
   display: flex;
   justify-content: space-between;
+  flex-wrap: nowrap;
   background: var(--lighter-shade);
 }
 
 .headerButton {
-  padding: 5px;
+  height: 5vh;
   background: var(--lighter-shade);
   color: white;
   border: none;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.filterBy {
+  width: 100%;
+}
+
+.sortBy {
+  display: flex;
+  flex-wrap: nowrap;
 }

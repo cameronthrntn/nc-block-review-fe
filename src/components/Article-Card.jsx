@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/Article-Card.css';
 import { Link } from '@reach/router';
-import { articleVote } from '../utils/articles';
 import Vote from './Vote';
 
 export default class ArticleCard extends Component {
