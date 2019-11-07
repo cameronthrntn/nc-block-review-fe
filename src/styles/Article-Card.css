@@ -1,0 +1,57 @@
+.articleCard {
+  width: 90%;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px var(--darker-shade);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.articleCard:hover {
+  transform: scale(1.05);
+  transition: .3s;
+}
+.articleCard a {
+  text-decoration: none;
+  color: white;
+}
+
+.articleBound {
+  background: white;
+  width: 100%;
+}
+
+.boundContents {
+  color: gray;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  font-size: .8em;
+}
+
+.lowerBound {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+img {
+  width: 50%;
+}
+
+.articleTitle {
+  color: black;
+  font-weight: lighter;
+  width: 100%;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .articleCard:hover {
+    transform: none;
+  }
+}

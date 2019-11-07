@@ -1,0 +1,53 @@
+.header {
+  background: rgb(255, 255, 255);
+  height: 5vh;
+  width: 100%;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+}
+
+.header .logo{
+  margin-left: 5vw;
+
+}
+
+.header p {
+  font-size: calc(10px + 2vmin);
+  float: left;
+  font-weight: bolder;
+}
+
+.header a {
+  color: black
+}
+
+.Np {
+  color: var(--red)
+}
+
+.headerLoginButton {
+  background: var(--red);
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5vw;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.headerLoginButton:hover {
+  background: var(--darker-red);
+  transition: .3s;
+}
+
+.headerUsername {
+  margin-right: 5vw;
+  color: var(--red);
+}

@@ -1,0 +1,49 @@
+.singleArticlePage {
+  max-width: 800px;
+  box-shadow: 1px 10px 5px var(--darker-shade);
+}
+
+.bar {
+  background: var(--lighter-shade);
+  height: 5vh;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: bold;
+  padding: 0 10px;
+  text-align: left;
+  height: auto;
+}
+
+.bar p {
+  float: left;
+}
+
+.barTitle {
+  margin: 0;
+  width: 100%;
+  font-size: 2em;
+  font-weight: lighter;
+}
+
+.contentContainer {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.articleFullContents {
+  padding: 20px;
+  font-size: 1.2em;
+}
+
+.articlebodyText {
+  text-align: justify;
+}
+
+.articleMetaInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

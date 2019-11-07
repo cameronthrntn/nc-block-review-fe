@@ -1,0 +1,44 @@
+.commentCard {
+  border-bottom: 1px solid white;
+}
+
+.commentMeta {
+  text-align: left;
+  padding: 3px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+p {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+.increase {
+  color: var(--red);
+}
+
+.voteCount {
+  color: gray;
+}
+
+.decrease {
+  color: var(--darker-shade);
+}
+
+.commentBody {
+  text-align: justify;
+  padding-bottom: 5px;
+  padding: 3px 20px;
+}
+
+.commentFooter {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  color: gray;
+  padding: 0 20px;
+}

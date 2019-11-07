@@ -1,3 +1,33 @@
 .article-list {
   list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.articleSorting {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  background: var(--lighter-shade);
+}
+
+.headerButton {
+  height: 5vh;
+  background: var(--lighter-shade);
+  color: white;
+  border: none;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.filterBy {
+  width: 100%;
+}
+
+.sortBy {
+  display: flex;
+  flex-wrap: nowrap;
 }
