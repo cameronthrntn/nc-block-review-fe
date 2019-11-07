@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import '../styles/Article-List.css';
 import { getArticles, sortArticlesQuery, formatDates } from '../utils/articles';
 import { getTopics } from '../utils/topics';
-// import { Link } from '@reach/router';
 import ArticleCard from './Article-Card';
 import ErrorHandling from './ErrorHandling';
 import Topics from './Topics';
+import Loader from './Loader';
 
 export default class ArticleList extends Component {
   state = {
@@ -15,7 +15,6 @@ export default class ArticleList extends Component {
     sort: 'created_at',
     isLoading: true,
     err: null
-    // isLoggedIn: false
   };
   getArticles = async topic => {
     try {
@@ -66,12 +65,6 @@ export default class ArticleList extends Component {
       .catch(err => this.setState({ err }));
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.token !== this.props.token) {
-      // if (this.props.token !== '') {
-      //   this.setState({ isLoggedIn: true }, () => this.getArticles());
-      // }
-      // this.getArticles();
-    }
     if (prevProps.topic !== this.props.topic) {
       this.getArticles(this.props.topic);
     }
@@ -89,11 +82,10 @@ export default class ArticleList extends Component {
   render() {
     return (
       <main>
-        {/* {!this.state.isLoggedIn ? <link } */}
         {this.state.err ? (
           <ErrorHandling err={this.state.err} />
         ) : this.state.isLoading ? (
-          <h2>Loading</h2>
+          <Loader page="articles" />
         ) : (
           <>
             <nav className="articleSorting">

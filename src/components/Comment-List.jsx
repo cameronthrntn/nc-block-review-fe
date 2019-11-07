@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import '../styles/Comment-List.css';
-
+import { UserConsumer } from './UserContext';
 import { getComments } from '../utils/comments';
 import Comment from './Comment';
 import AddComment from './AddComment';
+import Loader from './Loader';
 
 export default class CommentList extends Component {
   state = {
-    comments: []
+    comments: [],
+    isLoading: true
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.id !== this.props.id) {
-      getComments(this.props.id).then(comments => this.setState({ comments }));
+      getComments(this.props.id).then(comments =>
+        this.setState({ comments, isLoading: false })
+      );
     }
   }
   updateComments = comment => {
@@ -26,24 +30,38 @@ export default class CommentList extends Component {
       };
     });
   };
+  componentDidMount() {
+    getComments(this.props.id).then(comments =>
+      this.setState({ comments, isLoading: false })
+    );
+  }
   render() {
     const { comments } = this.state;
-    return (
+    return this.state.isLoading ? (
+      <Loader page="comments" />
+    ) : (
       <>
         <AddComment
           updateComments={this.updateComments}
           article={this.props.id}
           token={this.props.token}
+          setToken={this.props.setToken}
         />
         <ul className="commentList">
           {comments.map(comment => {
             return (
-              <Comment
-                key={comment.comment_id}
-                comment={comment}
-                removeCommentFromState={this.removeCommentFromState}
-                currentUser="jessjelly"
-              />
+              <UserConsumer>
+                {user => {
+                  return (
+                    <Comment
+                      key={comment.comment_id}
+                      comment={comment}
+                      removeCommentFromState={this.removeCommentFromState}
+                      currentUser={user.username}
+                    />
+                  );
+                }}
+              </UserConsumer>
             );
           })}
         </ul>

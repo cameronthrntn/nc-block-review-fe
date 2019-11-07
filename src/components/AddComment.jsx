@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import '../styles/AddComment.css';
 import { postComment } from '../utils/comments';
 import Login from './Login';
+import { UserConsumer } from './UserContext';
 
 export default class AddComment extends Component {
   state = {
     showingForm: false,
-    token: '',
     commentInput: ''
   };
   toggleForm = () => {
@@ -33,8 +33,6 @@ export default class AddComment extends Component {
     });
   };
   render() {
-    console.log(this.state.token, '<- token');
-    console.log(this.state.token == false, '<- token');
     return (
       <>
         {!this.state.showingForm ? (
@@ -46,27 +44,34 @@ export default class AddComment extends Component {
             <button className="closeForm" onClick={this.toggleForm}>
               x
             </button>
-            {!this.props.token && !this.state.token ? (
-              <Login setToken={this.setToken} toggleForm={this.toggleForm}/>
-            ) : (
-              <form className="commentForm" onSubmit={this.formSubmit}>
-                <label htmlFor="commentInput">
-                  <textarea
-                    rows="4"
-                    className="commentInput"
-                    id="commentInput"
-                    type="textarea"
-                    placeholder="comment..."
-                    value={this.state.comment}
-                    onChange={this.formChange}
-                    required
-                  ></textarea>
-                </label>
-                <button className="formSubmit" type="submit">
-                  post
-                </button>
-              </form>
-            )}
+            <UserConsumer>
+              {user => {
+                return !user.token ? (
+                  <Login
+                    setToken={this.props.setToken}
+                    toggleForm={this.toggleForm}
+                  />
+                ) : (
+                  <form className="commentForm" onSubmit={this.formSubmit}>
+                    <label htmlFor="commentInput">
+                      <textarea
+                        rows="4"
+                        className="commentInput"
+                        id="commentInput"
+                        type="textarea"
+                        placeholder="comment..."
+                        value={this.state.comment}
+                        onChange={this.formChange}
+                        required
+                      ></textarea>
+                    </label>
+                    <button className="formSubmit" type="submit">
+                      post
+                    </button>
+                  </form>
+                );
+              }}
+            </UserConsumer>
           </div>
         )}
       </>
