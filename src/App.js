@@ -23,8 +23,8 @@ export default class App extends Component {
       <div className="App">
         <UserProvider value={this.state.user}>
           <Header />
-          <Router>
-            <Login path="/login" setToken={this.setToken} />
+          <Router className="mainContents">
+            <Login path="/login" setToken={this.setToken} redir={true} />
             <ArticleList path="/" />
             <ArticleList path="/articles" />
             <ArticleList path="/topic" />

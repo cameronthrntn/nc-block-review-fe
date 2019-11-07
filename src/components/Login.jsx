@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { navigate } from '@reach/router';
+
 import { login } from '../utils/login';
 
 export default class Login extends Component {
@@ -15,12 +17,14 @@ export default class Login extends Component {
     try {
       const token = await login(this.state);
       this.props.setToken(token, this.state.username);
+      if (this.props.redir) navigate(`/`);
     } catch (err) {
       this.setState({ err });
     }
   };
   render() {
-    if(this.state.err) alert('Sorry, you could not be looged in at this time...')
+    if (this.state.err)
+      alert('Sorry, you could not be looged in at this time...');
     return (
       <form className="commentForm" onSubmit={this.formSubmit}>
         <h3>Please log in.</h3>
