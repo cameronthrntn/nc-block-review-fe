@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { handleVote } from '../utils/articles';
+// import {commentVote} from '../utils/comments'
 import upChevron from '../images/upChevron.svg';
 import downActive from '../images/downActive.svg';
 import upActive from '../images/upActive.svg';
@@ -14,7 +15,7 @@ export default class Vote extends Component {
   componentDidMount = () => {
     this.setState({ isLoading: false });
   };
-  vote = async e => {
+  vote = async e => {    
     const voteType = e.currentTarget.id;
     const { voteChange } = this.state;
     let val = 0;

@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-exports.getArticles = topic => {
+const getArticles = topic => {
   return axios({
     method: 'GET',
     params: { topic },
@@ -10,14 +10,14 @@ exports.getArticles = topic => {
   });
 };
 
-exports.getArticleById = async id => {
+const getArticleById = async id => {
   const { data } = await axios.get(
     `https://shubwub-nc-news.herokuapp.com/api/articles/${id}`
   );
   return data.article;
 };
 
-exports.sortArticlesQuery = async (sort_by, order, topic) => {
+const sortArticlesQuery = async (sort_by, order, topic) => {
   const { data } = await axios.get(
     `https://shubwub-nc-news.herokuapp.com/api/articles`,
     { params: { topic, sort_by, order } }
@@ -25,9 +25,7 @@ exports.sortArticlesQuery = async (sort_by, order, topic) => {
   return data.articles;
 };
 
-exports.handleVote = async (val, id, type) => {
-  console.log(val, id, type);
-
+const handleVote = async (val, id, type) => {
   const { data } = await axios.patch(
     `https://shubwub-nc-news.herokuapp.com/api/${type}s/${id}`,
     { inc_votes: val }
@@ -35,11 +33,19 @@ exports.handleVote = async (val, id, type) => {
   return data[type];
 };
 
-exports.formatDates = articles => {
+const formatDates = articles => {
   return articles.map(article => {
     const date = new Date(article.created_at);
     const displayDate = date.toDateString();
     article.created_at = displayDate;
     return article;
   });
+};
+
+export {
+  formatDates,
+  handleVote,
+  sortArticlesQuery,
+  getArticleById,
+  getArticles
 };

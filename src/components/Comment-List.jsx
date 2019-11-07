@@ -24,6 +24,8 @@ export default class CommentList extends Component {
     }
   }
   updateComments = comment => {
+    console.log(comment, '<- comm');
+    
     this.setState(curr => {
       return { comments: [comment, ...curr.comments] };
     });
@@ -51,12 +53,18 @@ export default class CommentList extends Component {
       <Loader page="comments" />
     ) : (
       <>
-        <AddComment
-          updateComments={this.updateComments}
-          article={this.props.id}
-          token={this.props.token}
-          setToken={this.props.setToken}
-        />
+        <UserConsumer>
+          {user => {
+            return (
+              <AddComment
+                updateComments={this.updateComments}
+                article={this.props.id}
+                setToken={this.props.setToken}
+                user={user}
+              />
+            );
+          }}
+        </UserConsumer>
         <ul className="commentList">
           {comments.map(comment => {
             return (

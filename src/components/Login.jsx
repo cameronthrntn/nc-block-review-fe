@@ -36,6 +36,7 @@ export default class Login extends Component {
             value={this.state.username}
             onChange={this.formInput}
             placeholder="username..."
+            required
           />
         </label>
         <label htmlFor="password">
@@ -46,6 +47,7 @@ export default class Login extends Component {
             value={this.state.password}
             onChange={this.formInput}
             placeholder="password..."
+            required
           />
         </label>
         <button className="formSubmit" type="submit">

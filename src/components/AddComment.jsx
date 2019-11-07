@@ -21,8 +21,8 @@ export default class AddComment extends Component {
   formSubmit = async e => {
     e.preventDefault();
     try {
-      const { comment } = await postComment(
-        { body: this.state.commentInput, username: this.state.username },
+      const comment = await postComment(
+        { body: this.state.commentInput, username: this.props.user.username },
         this.props.article
       );
       this.props.updateComments(comment);
@@ -37,7 +37,7 @@ export default class AddComment extends Component {
     });
   };
   render() {
-    if(this.state.err) alert('error posting comment.')
+    if (this.state.err) alert('error posting comment.');
     return (
       <>
         {!this.state.showingForm ? (

@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-exports.login = data => {
+const login = data => {
   return axios
     .post('https://shubwub-nc-news.herokuapp.com/api/login', data)
     .then(({ data }) => {
@@ -8,3 +8,5 @@ exports.login = data => {
     })
     .catch(console.log);
 };
+
+export { login };
