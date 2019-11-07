@@ -36,7 +36,7 @@ export default class ArticleList extends Component {
   };
   sortAndOrderArticles = async (sort, order, topic) => {
     try {
-      const { articles } = await sortArticlesQuery(sort, order, topic);
+      const articles = await sortArticlesQuery(sort, order, topic);
       this.setState({ articles: formatDates(articles), err: null });
     } catch (err) {
       this.setState({ err });
