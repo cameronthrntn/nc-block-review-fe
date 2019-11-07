@@ -1,9 +1,8 @@
 const axios = require('axios');
 
-exports.getArticles = (topic, token) => {
+exports.getArticles = topic => {
   return axios({
     method: 'GET',
-    // headers: { Authorization: `BEARER ${token}` },
     params: { topic },
     url: 'https://shubwub-nc-news.herokuapp.com/api/articles'
   }).then(({ data }) => {

@@ -6,6 +6,7 @@ import { Router } from '@reach/router';
 import Header from './components/Header';
 import SingleArticle from './components/Single-Article';
 import { UserProvider } from './components/UserContext';
+import ErrorHandling from './components/ErrorHandling';
 
 export default class App extends Component {
   state = {
@@ -29,6 +30,12 @@ export default class App extends Component {
             <ArticleList path="/topic" />
             <ArticleList path="/topic/:topic" />
             <SingleArticle path="/article/:id" setToken={this.setToken} />
+            <ErrorHandling
+              default
+              err={{
+                response: { status: 404, data: { msg: 'path not found!' } }
+              }}
+            />
           </Router>
         </UserProvider>
       </div>

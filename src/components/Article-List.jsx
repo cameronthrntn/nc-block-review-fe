@@ -18,7 +18,7 @@ export default class ArticleList extends Component {
   };
   getArticles = async topic => {
     try {
-      const { articles } = await getArticles(topic, this.props.token);
+      const { articles } = await getArticles(topic);
       this.setState({
         articles: formatDates(articles),
         isLoading: false,
@@ -34,10 +34,13 @@ export default class ArticleList extends Component {
   orderArticles = e => {
     this.setState({ order: e.target.value });
   };
-  sortAndOrderArticles = (sort, order, topic) => {
-    sortArticlesQuery(sort, order, topic).then(articles =>
-      this.setState({ articles: formatDates(articles), err: null })
-    );
+  sortAndOrderArticles = async (sort, order, topic) => {
+    try {
+      const { articles } = await sortArticlesQuery(sort, order, topic);
+      this.setState({ articles: formatDates(articles), err: null });
+    } catch (err) {
+      this.setState({ err });
+    }
   };
   updateArticleVotes = article => {
     this.setState(curr => {

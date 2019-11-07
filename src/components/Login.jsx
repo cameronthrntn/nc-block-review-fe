@@ -4,19 +4,23 @@ import { login } from '../utils/login';
 export default class Login extends Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    err: null
   };
   formInput = ({ target }) => {
     this.setState({ [target.id]: target.value });
   };
-  formSubmit = e => {
+  formSubmit = async e => {
     e.preventDefault();
-    login(this.state).then(token => {
-      this.props.setToken(token, this.state.username)
-      // this.props.toggleForm();
-    });
+    try {
+      const token = await login(this.state);
+      this.props.setToken(token, this.state.username);
+    } catch (err) {
+      this.setState({ err });
+    }
   };
   render() {
+    if(this.state.err) alert('Sorry, you could not be looged in at this time...')
     return (
       <form className="commentForm" onSubmit={this.formSubmit}>
         <h3>Please log in.</h3>

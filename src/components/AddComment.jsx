@@ -7,7 +7,8 @@ import { UserConsumer } from './UserContext';
 export default class AddComment extends Component {
   state = {
     showingForm: false,
-    commentInput: ''
+    commentInput: '',
+    err: null
   };
   toggleForm = () => {
     this.setState(curr => {
@@ -17,15 +18,18 @@ export default class AddComment extends Component {
   formChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  formSubmit = e => {
+  formSubmit = async e => {
     e.preventDefault();
-    postComment(
-      { body: this.state.commentInput, username: this.state.username },
-      this.props.article
-    ).then(comment => {
+    try {
+      const { comment } = await postComment(
+        { body: this.state.commentInput, username: this.state.username },
+        this.props.article
+      );
       this.props.updateComments(comment);
       this.setState({ commentInput: '', showingForm: false });
-    });
+    } catch (err) {
+      this.setState({ err });
+    }
   };
   setToken = token => {
     this.setState({
@@ -33,6 +37,7 @@ export default class AddComment extends Component {
     });
   };
   render() {
+    if(this.state.err) alert('error posting comment.')
     return (
       <>
         {!this.state.showingForm ? (

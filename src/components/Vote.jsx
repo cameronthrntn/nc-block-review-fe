@@ -3,17 +3,18 @@ import { handleVote } from '../utils/articles';
 import upChevron from '../images/upChevron.svg';
 import downActive from '../images/downActive.svg';
 import upActive from '../images/upActive.svg';
-import '../styles/Vote.css'
+import '../styles/Vote.css';
 
 export default class Vote extends Component {
   state = {
     voteChange: 0,
-    isLoading: true
+    isLoading: true,
+    err: null
   };
   componentDidMount = () => {
     this.setState({ isLoading: false });
   };
-  vote = e => {
+  vote = async e => {
     const voteType = e.currentTarget.id;
     const { voteChange } = this.state;
     let val = 0;
@@ -24,13 +25,17 @@ export default class Vote extends Component {
     } else {
       val = voteType === 'upvote' ? 1 : -1;
     }
-    handleVote(val, this.props.itemID, this.props.type).then(() => {
+    try {
+      await handleVote(val, this.props.itemID, this.props.type);
       this.setState(curr => {
         return { voteChange: curr.voteChange + val };
       });
-    });
+    } catch (err) {
+      this.setState({ err });
+    }
   };
   render() {
+    if(this.state.err) alert('There was a problem submitting your vote')
     return (
       <div className="votes">
         {!this.state.isLoading && (

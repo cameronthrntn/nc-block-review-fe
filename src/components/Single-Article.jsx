@@ -3,20 +3,27 @@ import { getArticleById, formatDates } from '../utils/articles';
 import '../styles/Single-Article.css';
 import CommentList from './Comment-List';
 import Loader from './Loader';
+import ErrorHandling from './ErrorHandling';
 
 export default class SingleArticle extends Component {
   state = {
     article: {},
-    isLoading: true
+    isLoading: true,
+    err: null
   };
-  componentDidMount() {
-    getArticleById(this.props.id).then(article =>
-      this.setState({ article, isLoading: false })
-    );
+  async componentDidMount() {
+    try {
+      const article = await getArticleById(this.props.id);
+      this.setState({ article, isLoading: false });
+    } catch (err) {
+      this.setState({ err });
+    }
   }
   render() {
     const { title, author, body, article_id } = this.state.article;
-    return this.state.isLoading ? (
+    return this.state.err ? (
+      <ErrorHandling err={this.state.err} />
+    ) : this.state.isLoading ? (
       <Loader page="article" />
     ) : (
       <article className="singleArticlePage">

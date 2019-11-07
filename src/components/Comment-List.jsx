@@ -5,17 +5,22 @@ import { getComments } from '../utils/comments';
 import Comment from './Comment';
 import AddComment from './AddComment';
 import Loader from './Loader';
+import ErrorHandling from './ErrorHandling';
 
 export default class CommentList extends Component {
   state = {
     comments: [],
-    isLoading: true
+    isLoading: true,
+    err: null
   };
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps) {
     if (prevProps.id !== this.props.id) {
-      getComments(this.props.id).then(comments =>
-        this.setState({ comments, isLoading: false })
-      );
+      try {
+        const comments = await getComments(this.props.id);
+        this.setState({ comments, isLoading: false });
+      } catch (err) {
+        this.setState({ err });
+      }
     }
   }
   updateComments = comment => {
@@ -30,14 +35,19 @@ export default class CommentList extends Component {
       };
     });
   };
-  componentDidMount() {
-    getComments(this.props.id).then(comments =>
-      this.setState({ comments, isLoading: false })
-    );
+  async componentDidMount() {
+    try {
+      const comments = await getComments(this.props.id);
+      this.setState({ comments, isLoading: false });
+    } catch (err) {
+      this.setState({ err });
+    }
   }
   render() {
     const { comments } = this.state;
-    return this.state.isLoading ? (
+    return this.state.err ? (
+      <ErrorHandling err={this.state.err} />
+    ) : this.state.isLoading ? (
       <Loader page="comments" />
     ) : (
       <>
@@ -50,11 +60,10 @@ export default class CommentList extends Component {
         <ul className="commentList">
           {comments.map(comment => {
             return (
-              <UserConsumer>
+              <UserConsumer key={comment.comment_id}>
                 {user => {
                   return (
                     <Comment
-                      key={comment.comment_id}
                       comment={comment}
                       removeCommentFromState={this.removeCommentFromState}
                       currentUser={user.username}
