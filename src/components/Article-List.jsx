@@ -6,6 +6,7 @@ import ArticleCard from './Article-Card';
 import ErrorHandling from './ErrorHandling';
 import Topics from './Topics';
 import Loader from './Loader';
+import InfiniteScroll from 'react-infinite-scroller';
 
 export default class ArticleList extends Component {
   state = {
@@ -13,6 +14,8 @@ export default class ArticleList extends Component {
     topics: [],
     topic: '',
     sort: 'created_at',
+    page: 1,
+    hasMore: true,
     isLoading: true,
     err: null
   };
@@ -54,6 +57,33 @@ export default class ArticleList extends Component {
       };
     });
   };
+  pageChange = async () => {
+    const nextPage = this.state.page + 1;
+    try {
+      const articles = await sortArticlesQuery(
+        this.state.sort,
+        this.state.order,
+        this.state.topic,
+        nextPage
+      );
+      this.setState(curr => {
+        return {
+          page: nextPage,
+          articles: [...curr.articles, ...formatDates(articles)],
+          err: null
+        };
+      });
+    } catch (err) {
+      this.setState({ err });
+    }
+  };
+  loadMore = async () => {
+    const { articles } = this.state;
+    console.log(articles.length);
+    articles.length % 10 !== 0
+      ? this.setState({ hasMore: false })
+      : this.pageChange();
+  };
 
   componentDidMount() {
     const promises = [getArticles(this.props.topic), getTopics()];
@@ -62,24 +92,21 @@ export default class ArticleList extends Component {
         return this.setState({
           articles: formatDates(data[0].articles),
           topics: data[1],
+          topic: this.props.topic,
           isLoading: false
         });
       })
       .catch(err => this.setState({ err }));
   }
   componentDidUpdate(prevProps, prevState) {
+    const { sort, order, topic, page } = this.state;
     if (prevProps.topic !== this.props.topic) {
-      this.getArticles(this.props.topic);
+      this.getArticles(this.props.topic).then(() => {
+        this.setState({ topic: this.props.topic });
+      });
     }
-    if (
-      prevState.sort !== this.state.sort ||
-      prevState.order !== this.state.order
-    ) {
-      this.sortAndOrderArticles(
-        this.state.sort,
-        this.state.order,
-        this.state.topic
-      );
+    if (prevState.sort !== sort || prevState.order !== order) {
+      this.sortAndOrderArticles(sort, order, topic, page);
     }
   }
   render() {
@@ -106,16 +133,45 @@ export default class ArticleList extends Component {
               </div>
             </nav>
             <ul className="article-list">
-              {this.state.articles.map(article => {
-                return (
-                  <ArticleCard
-                    key={article.article_id}
-                    article={article}
-                    updateArticleVotes={this.updateArticleVotes}
-                  />
-                );
-              })}
+              {this.state.articles.length > 1 ? (
+                <InfiniteScroll
+                  loadMore={this.loadMore.bind(this)}
+                  hasMore={this.state.hasMore}
+                  useWindow={true}
+                  loader={<Loader page="articles" />}
+                >
+                  {this.state.articles.map(article => {
+                    return (
+                      <ArticleCard
+                        key={article.article_id}
+                        article={article}
+                        updateArticleVotes={this.updateArticleVotes}
+                      />
+                    );
+                  })}
+                </InfiniteScroll>
+              ) : (
+                <ErrorHandling
+                  err={{
+                    response: {
+                      status: 404,
+                      data: { msg: 'There are no articles to display' }
+                    }
+                  }}
+                />
+              )}
             </ul>
+            {/* <footer className="pageChange">
+              {this.state.page > 1 && (
+                <button id="prevPage" onClick={this.pageChange}>
+                  {'<'}
+                </button>
+              )}
+              <h4>{this.state.page}</h4>
+              <button id="nextPage" onClick={this.pageChange}>
+                >
+              </button>
+            </footer> */}
           </>
         )}
       </main>

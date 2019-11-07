@@ -24,7 +24,7 @@ export default class Login extends Component {
   };
   render() {
     if (this.state.err)
-      alert('Sorry, you could not be looged in at this time...');
+      alert('Sorry, you could not be logged in at this time...');
     return (
       <form className="commentForm" onSubmit={this.formSubmit}>
         <h3>Please log in.</h3>

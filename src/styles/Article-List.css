@@ -8,6 +8,7 @@
 }
 
 .articleSorting {
+  margin: auto;
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
@@ -30,4 +31,28 @@
 .sortBy {
   display: flex;
   flex-wrap: nowrap;
+}
+
+.pageChange {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageChange button {
+  background: none;
+  border: 1px solid var(--red);
+  border-radius: 5px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--red);
+  margin: 20px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.pageChange button:hover {
+  background: var(--red);
+  color: white;
+  transition: 0.3s;
 }

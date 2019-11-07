@@ -7,6 +7,7 @@ A simple news/article site built as a result of the frontend 'block-review' on t
 ## Getting Started
 This project is built using react and so starting it is as simple as:
 
+(Recommended node version: 12.10.0)
 1. Installing dependancies:
   ```bash
     npm i 

@@ -23,9 +23,7 @@ export default class CommentList extends Component {
       }
     }
   }
-  updateComments = comment => {
-    console.log(comment, '<- comm');
-    
+  updateComments = comment => {    
     this.setState(curr => {
       return { comments: [comment, ...curr.comments] };
     });

@@ -1,5 +1,5 @@
 .articleCard {
-  width: 90%;
+  width: 95%;
   border-radius: 5px;
   box-shadow: 2px 2px 5px var(--darker-shade);
   display: flex;
@@ -9,6 +9,11 @@
   margin-bottom: 20px;
   overflow: hidden;
   transition: .3s;
+  margin-left: 2.5%;
+}
+
+.articleCard a {
+  width: 100%;
 }
 
 .articleCard:hover {

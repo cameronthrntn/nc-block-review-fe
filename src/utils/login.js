@@ -5,8 +5,7 @@ const login = data => {
     .post('https://shubwub-nc-news.herokuapp.com/api/login', data)
     .then(({ data }) => {
       return data.token;
-    })
-    .catch(console.log);
+    });
 };
 
 export { login };

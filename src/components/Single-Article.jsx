@@ -4,6 +4,7 @@ import '../styles/Single-Article.css';
 import CommentList from './Comment-List';
 import Loader from './Loader';
 import ErrorHandling from './ErrorHandling';
+import Vote from './Vote';
 
 export default class SingleArticle extends Component {
   state = {
@@ -20,7 +21,7 @@ export default class SingleArticle extends Component {
     }
   }
   render() {
-    const { title, author, body, article_id } = this.state.article;
+    const { title, author, body, article_id, votes } = this.state.article;
     return this.state.err ? (
       <ErrorHandling err={this.state.err} />
     ) : this.state.isLoading ? (
@@ -38,6 +39,7 @@ export default class SingleArticle extends Component {
               <p className="">
                 {formatDates([this.state.article])[0].created_at}
               </p>
+              <Vote votes={votes} type="article" itemID={article_id} />
             </div>
           </div>
         </footer>

@@ -17,10 +17,10 @@ const getArticleById = async id => {
   return data.article;
 };
 
-const sortArticlesQuery = async (sort_by, order, topic) => {
+const sortArticlesQuery = async (sort_by, order, topic, p = 1) => {
   const { data } = await axios.get(
     `https://shubwub-nc-news.herokuapp.com/api/articles`,
-    { params: { topic, sort_by, order } }
+    { params: { topic, sort_by, order, p } }
   );
   return data.articles;
 };
