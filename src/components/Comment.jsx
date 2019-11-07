@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/Comment.css';
-import { removeComment, commentVote } from '../utils/comments';
+import { removeComment } from '../utils/comments';
 import Vote from './Vote';
 import bin from '../images/bin.svg';
 
@@ -14,14 +14,6 @@ export default class Comment extends Component {
     try {
       await removeComment(this.props.comment.comment_id);
       this.props.removeCommentFromState(this.props.comment.comment_id);
-    } catch (err) {
-      this.setState({ err });
-    }
-  };
-  vote = async val => {
-    try {
-      const comment = await commentVote(val, this.props.comment.comment_id);
-      this.setState({ comment });
     } catch (err) {
       this.setState({ err });
     }
