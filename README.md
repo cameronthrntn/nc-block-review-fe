@@ -17,4 +17,4 @@ This project is built using react and so starting it is as simple as:
   ```
 
 
-**For testing util functions, simply run ``` npm t ```**
+**Posting a comment requires you to log in, the user 'jessjelly' password 'myPassword123!' (VERY secure)**
