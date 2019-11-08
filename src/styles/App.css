@@ -8,6 +8,7 @@
   justify-content: flex-start;
   font-size: calc(10px + 1vmin);
   color: white;
+  overflow-x: hidden;
 }
 
 .App-link {
@@ -16,4 +17,7 @@
 
 .mainContents {
   margin-top: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

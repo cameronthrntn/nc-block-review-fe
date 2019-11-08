@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { handleVote } from '../utils/articles';
-// import {commentVote} from '../utils/comments'
+import { UserConsumer } from './UserContext';
 import upChevron from '../images/upChevron.svg';
 import downActive from '../images/downActive.svg';
 import upActive from '../images/upActive.svg';
@@ -15,7 +15,7 @@ export default class Vote extends Component {
   componentDidMount = () => {
     this.setState({ isLoading: false });
   };
-  vote = async e => {    
+  vote = async e => {
     const voteType = e.currentTarget.id;
     const { voteChange } = this.state;
     let val = 0;
@@ -36,53 +36,71 @@ export default class Vote extends Component {
     }
   };
   render() {
-    if(this.state.err) alert('There was a problem submitting your vote')
+    if (this.state.err) alert('There was a problem submitting your vote');
     return (
       <div className="votes">
         {!this.state.isLoading && (
-          <>
-            <button className="voteButton" id="downvote" onClick={this.vote}>
-              {this.state.voteChange < 0 ? (
-                <img
-                  className="downvote"
-                  src={downActive}
-                  alt="active Downvote arrow"
-                />
-              ) : (
-                <img
-                  className="downvote"
-                  src={upChevron}
-                  alt="inactive Downvote arrow"
-                />
-              )}
-            </button>
-            <p
-              className={
-                this.state.voteChange > 0
-                  ? 'increase'
-                  : this.state.voteChange < 0
-                  ? 'decrease'
-                  : 'voteCount'
-              }
-            >
-              {this.props.votes + this.state.voteChange}
-            </p>
-            <button className="voteButton" id="upvote" onClick={this.vote}>
-              {this.state.voteChange > 0 ? (
-                <img
-                  className="upvote"
-                  src={upActive}
-                  alt="active upvote arrow"
-                />
-              ) : (
-                <img
-                  className="upvote"
-                  src={upChevron}
-                  alt=" inactive upvote arrow"
-                />
-              )}
-            </button>
-          </>
+          <UserConsumer>
+            {user => {
+              return (
+                <>
+                  {user.token && (
+                    <button
+                      className="voteButton"
+                      id="downvote"
+                      onClick={this.vote}
+                    >
+                      {this.state.voteChange < 0 ? (
+                        <img
+                          className="downvote"
+                          src={downActive}
+                          alt="active Downvote arrow"
+                        />
+                      ) : (
+                        <img
+                          className="downvote"
+                          src={upChevron}
+                          alt="inactive Downvote arrow"
+                        />
+                      )}
+                    </button>
+                  )}
+                  <p
+                    className={
+                      this.state.voteChange > 0
+                        ? 'increase'
+                        : this.state.voteChange < 0
+                        ? 'decrease'
+                        : 'voteCount'
+                    }
+                  >
+                    {this.props.votes + this.state.voteChange}
+                  </p>
+                  {user.token && (
+                    <button
+                      className="voteButton"
+                      id="upvote"
+                      onClick={this.vote}
+                    >
+                      {this.state.voteChange > 0 ? (
+                        <img
+                          className="upvote"
+                          src={upActive}
+                          alt="active upvote arrow"
+                        />
+                      ) : (
+                        <img
+                          className="upvote"
+                          src={upChevron}
+                          alt=" inactive upvote arrow"
+                        />
+                      )}
+                    </button>
+                  )}
+                </>
+              );
+            }}
+          </UserConsumer>
         )}
       </div>
     );

@@ -17,7 +17,8 @@ export default class ArticleList extends Component {
     page: 1,
     hasMore: true,
     isLoading: true,
-    err: null
+    err: null,
+    userpage: false
   };
   getArticles = async topic => {
     try {
@@ -86,7 +87,11 @@ export default class ArticleList extends Component {
   };
 
   componentDidMount() {
-    const promises = [getArticles(this.props.topic), getTopics()];
+    if (this.props.user) this.setState({ userpage: true });
+    const promises = [
+      getArticles(this.props.topic, this.props.user),
+      getTopics()
+    ];
     Promise.all(promises)
       .then(data => {
         return this.setState({
@@ -118,20 +123,26 @@ export default class ArticleList extends Component {
           <Loader page="articles" />
         ) : (
           <>
-            <nav className="articleSorting">
-              <Topics />
-              <div className="sortBy">
-                <select className="headerButton" onChange={this.sortArticles}>
-                  <option value="created_at">Date Created</option>
-                  <option value="comment_count">Comment Count</option>
-                  <option value="votes">Votes</option>
-                </select>
-                <select className="headerButton" onChange={this.orderArticles}>
-                  <option value="desc">desc</option>
-                  <option value="asc">asc</option>
-                </select>
-              </div>
-            </nav>
+            {' '}
+            {!this.state.userpage && (
+              <nav className="articleSorting">
+                <Topics />
+                <div className="sortBy">
+                  <select className="headerButton" onChange={this.sortArticles}>
+                    <option value="created_at">Date Created</option>
+                    <option value="comment_count">Comment Count</option>
+                    <option value="votes">Votes</option>
+                  </select>
+                  <select
+                    className="headerButton"
+                    onChange={this.orderArticles}
+                  >
+                    <option value="desc">desc</option>
+                    <option value="asc">asc</option>
+                  </select>
+                </div>
+              </nav>
+            )}
             <ul className="article-list">
               {this.state.articles.length > 1 ? (
                 <InfiniteScroll
@@ -161,17 +172,6 @@ export default class ArticleList extends Component {
                 />
               )}
             </ul>
-            {/* <footer className="pageChange">
-              {this.state.page > 1 && (
-                <button id="prevPage" onClick={this.pageChange}>
-                  {'<'}
-                </button>
-              )}
-              <h4>{this.state.page}</h4>
-              <button id="nextPage" onClick={this.pageChange}>
-                >
-              </button>
-            </footer> */}
           </>
         )}
       </main>

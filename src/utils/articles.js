@@ -1,13 +1,12 @@
 const axios = require('axios');
 
-const getArticles = topic => {
-  return axios({
+const getArticles = async (topic, author) => {
+  const { data } = await axios({
     method: 'GET',
-    params: { topic },
+    params: { topic, author },
     url: 'https://shubwub-nc-news.herokuapp.com/api/articles'
-  }).then(({ data }) => {
-    return data;
   });
+  return data;
 };
 
 const getArticleById = async id => {
