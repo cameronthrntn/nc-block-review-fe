@@ -16,8 +16,19 @@ export default class App extends Component {
   };
   setUser = async (token, username) => {
     const user = await getUser(username);
-    this.setState({ user: { ...user, token } });
+    this.setState({ user: { ...user, token } }, () => {
+      sessionStorage.setItem('username', username);
+      sessionStorage.setItem('avatar', user.avatar);
+    });
   };
+  componentDidMount() {
+    if (sessionStorage.user) {
+      const { username, avatar } = sessionStorage;
+      this.setState({
+        user: { username, avatar }
+      });
+    }
+  }
   render() {
     return (
       <div className="App">

@@ -10,25 +10,24 @@
 
 .userArticles {
   width: 100%;
-  /* border: 1px solid red; */
-
 }
 
 .userInfo {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 10px;
-  /* background: var(--darker-shade); */
   box-shadow: 2px 2px 5px var(--darker-shade);
   color: white;
   margin-block-start: 1em;
   padding: 10px;
-  /* border: 1px solid red; */
 }
 
-.userInfo img {
+.userInfoCard {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userInfoCard img {
   width: 20%;
   border-radius: 50%;
   border: 3px solid white;
@@ -36,6 +35,17 @@
 
 .userDetails {
   width: 70%;
+}
+
+.logout {
+  width: 100%;
+  border: 1px solid var(--red);
+  color: var(--red);
+  background: var(--main-colour);
+}
+
+.logout:hover {
+  color: white;
 }
 
 @media (min-width: 1025px) {

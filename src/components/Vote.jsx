@@ -44,7 +44,7 @@ export default class Vote extends Component {
             {user => {
               return (
                 <>
-                  {user.token && (
+                  {user.username && (
                     <button
                       className="voteButton"
                       id="downvote"
@@ -76,7 +76,7 @@ export default class Vote extends Component {
                   >
                     {this.props.votes + this.state.voteChange}
                   </p>
-                  {user.token && (
+                  {user.username && (
                     <button
                       className="voteButton"
                       id="upvote"

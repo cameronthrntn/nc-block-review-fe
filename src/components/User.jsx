@@ -24,11 +24,22 @@ export default class User extends Component {
           <ArticleList user={username} />
         </section>
         <aside className="userInfo">
-          <div className="userDetails">
-            <h2>{username}</h2>
-            <h3>{name}</h3>
+          <div className="userInfoCard">
+            <div className="userDetails">
+              <h2>{username}</h2>
+              <h3>{name}</h3>
+            </div>
+            <img src={avatar} alt="user avatar" />
           </div>
-          <img src={avatar} alt="user avatar" />
+          <UserConsumer>
+            {user => {
+              return (
+                user.username === this.state.user.username && (
+                  <button className="headerLoginButton logout">logout</button>
+                )
+              );
+            }}
+          </UserConsumer>
         </aside>
       </div>
     );

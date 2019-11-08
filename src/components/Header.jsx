@@ -15,11 +15,13 @@ export default function Header() {
       </div>
       {user.username ? (
         <Link to={`user/${user.username}`}>
-          <div className="userCard">
-            <p>{user.username}</p>
-            <button className="headerUserIcon">
-              <img src={user.avatar} alt="user avatar" />
-            </button>
+          <div className="userSection">
+            <div className="userCard">
+              <p>{user.username}</p>
+              <button className="headerUserIcon">
+                <img src={user.avatar} alt="user avatar" />
+              </button>
+            </div>
           </div>
         </Link>
       ) : (

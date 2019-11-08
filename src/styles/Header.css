@@ -46,9 +46,11 @@
   transition: .3s;
 }
 
-.headerUsername {
-  margin-right: 5vw;
-  color: var(--red);
+.userSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .userCard {

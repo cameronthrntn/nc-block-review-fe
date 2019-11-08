@@ -51,7 +51,7 @@ export default class AddComment extends Component {
             </button>
             <UserConsumer>
               {user => {
-                return !user.token ? (
+                return !user.username ? (
                   <Login
                     setUser={this.props.setUser}
                     toggleForm={this.toggleForm}
