@@ -44,7 +44,7 @@ export default class SingleArticle extends Component {
           </div>
         </footer>
         <section className="commentSection">
-          <CommentList id={article_id} setToken={this.props.setToken} />
+          <CommentList id={article_id} setUser={this.props.setUser} />
         </section>
       </article>
     );

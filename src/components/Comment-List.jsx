@@ -57,7 +57,7 @@ export default class CommentList extends Component {
               <AddComment
                 updateComments={this.updateComments}
                 article={this.props.id}
-                setToken={this.props.setToken}
+                setUser={this.props.setUser}
                 user={user}
               />
             );

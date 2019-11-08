@@ -8,4 +8,13 @@ const login = data => {
     });
 };
 
-export { login };
+const getUser = async uname => {
+  const {
+    data: { user }
+  } = await axios.get(
+    `https://shubwub-nc-news.herokuapp.com/api/users/${uname}`
+  );
+  return { username: user.username, name: user.name, avatar: user.avatar_url };
+};
+
+export { login, getUser };

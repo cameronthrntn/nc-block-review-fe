@@ -12,7 +12,6 @@
 
 .header .logo{
   margin-left: 5vw;
-
 }
 
 .header p {
@@ -50,4 +49,37 @@
 .headerUsername {
   margin-right: 5vw;
   color: var(--red);
+}
+
+.userCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 2px solid var(--red);
+  padding-left: 3vw;
+  height: 3vh;
+  margin-right: 5vw;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+.userCard p {
+  margin: 0;
+  font-size: 0.8em;
+}
+
+.headerUserIcon {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.headerUserIcon img {
+  width: 4vh;
+  height: 4vh;
+  border-radius: 50%;
+  border: 2px solid var(--red);
 }

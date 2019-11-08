@@ -16,7 +16,7 @@ export default class Login extends Component {
     e.preventDefault();
     try {
       const token = await login(this.state);
-      this.props.setToken(token, this.state.username);
+      this.props.setUser(token, this.state.username);
       if (this.props.redir) navigate(`/`);
     } catch (err) {
       this.setState({ err });

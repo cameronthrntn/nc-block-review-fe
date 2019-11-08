@@ -31,7 +31,7 @@ export default class AddComment extends Component {
       this.setState({ err });
     }
   };
-  setToken = token => {
+  setUser = token => {
     this.setState({
       token
     });
@@ -53,7 +53,7 @@ export default class AddComment extends Component {
               {user => {
                 return !user.token ? (
                   <Login
-                    setToken={this.props.setToken}
+                    setUser={this.props.setUser}
                     toggleForm={this.toggleForm}
                   />
                 ) : (
