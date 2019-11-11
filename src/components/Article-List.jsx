@@ -80,7 +80,6 @@ export default class ArticleList extends Component {
   };
   loadMore = async () => {
     const { articles } = this.state;
-    console.log(articles.length);
     articles.length % 10 !== 0
       ? this.setState({ hasMore: false })
       : this.pageChange();
@@ -123,7 +122,6 @@ export default class ArticleList extends Component {
           <Loader page="articles" />
         ) : (
           <>
-            {' '}
             {!this.state.userpage && (
               <nav className="articleSorting">
                 <Topics />
@@ -149,7 +147,7 @@ export default class ArticleList extends Component {
                   loadMore={this.loadMore.bind(this)}
                   hasMore={this.state.hasMore}
                   useWindow={true}
-                  loader={<Loader page="articles" />}
+                  loader={<Loader page="articles" key="loader"/>}
                 >
                   {this.state.articles.map(article => {
                     return (

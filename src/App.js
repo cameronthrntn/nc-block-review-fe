@@ -14,6 +14,11 @@ export default class App extends Component {
   state = {
     user: {}
   };
+  clearUser = () => {
+    this.setState({ user: {} }, () => {
+      sessionStorage.clear();
+    });
+  };
   setUser = async (token, username) => {
     const user = await getUser(username);
     this.setState({ user: { ...user, token } }, () => {
@@ -36,7 +41,7 @@ export default class App extends Component {
           <Header />
           <Router className="mainContents">
             <Login path="/login" setUser={this.setUser} redir={true} />
-            <User path="/user/:username" />
+            <User path="/user/:username" clearUser={this.clearUser} />
             <ArticleList path="/" />
             <ArticleList path="/articles" />
             <ArticleList path="/topic" />

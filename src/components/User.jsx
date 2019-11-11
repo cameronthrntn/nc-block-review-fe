@@ -4,11 +4,16 @@ import { getUser } from '../utils/login';
 import '../styles/User.css';
 import ArticleList from './Article-List';
 import Loader from './Loader';
+import { navigate } from '@reach/router';
 
 export default class User extends Component {
   state = {
     user: {},
     isLoading: true
+  };
+  logout = () => {
+    this.props.clearUser();
+    navigate('/');
   };
   componentDidMount = async () => {
     const user = await getUser(this.props.username);
@@ -35,7 +40,12 @@ export default class User extends Component {
             {user => {
               return (
                 user.username === this.state.user.username && (
-                  <button className="headerLoginButton logout">logout</button>
+                  <button
+                    className="headerLoginButton logout"
+                    onClick={this.logout}
+                  >
+                    logout
+                  </button>
                 )
               );
             }}
